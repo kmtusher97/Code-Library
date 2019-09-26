@@ -16,6 +16,31 @@ int extended_gcd( int a, int b, int& x, int &y ) {
 }
 
 /**
+ * Iterative Implementation
+ */
+void extendedEuclid( ll a, ll b) {
+    ll x = 0, y = 1;
+    ll lastx = 1, lasty = 0, temp;
+    while( b != 0 ) {
+        ll q = a / b;
+        ll r = a % b;
+
+        a = b;
+        b = r;
+
+        temp = x;
+        x = lastx - q * x;
+        lastx = temp;
+
+        temp = y;
+        y = lasty - q * y;
+        lasty = temp;
+    }
+    cout << "GCD = " << a << "\n";
+    cout << "Roots  x : " << lastx  << " y :" << lasty;
+}
+
+/**
  * Modular Inverse using Extended Euclidean algorithm
  * a⋅x + m⋅y = 1
  * a⋅x ≡ 1 (mod m)
