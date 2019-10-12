@@ -1,5 +1,6 @@
 /**
  * Suffix Array O(n log n)
+ * LCP
  */
 struct SuffixArray {
 	char* T;
