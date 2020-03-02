@@ -20,7 +20,7 @@ struct Point {
 	Point(T _x, T _y) { x = _x, y = _y; }
 	bool operator == (Point o) const { return !dcmp(x - o.x) and !dcmp(y - o.y); }
 	bool operator < (Point o) const { return !dcmp(x - o.x) ? (dcmp(y - o.y) < 0) : (dcmp(x - o.x) < 0); }
-	Point operator + (Point o) const { return {x + o.x, y + o.y}; }	
+	Point operator + (Point o) const { return {x + o.x, y + o.y}; }
 	Point operator - (Point o) const { return {x - o.x, y - o.y}; }
 	Point operator * (T a) const { return {x * a, y * a}; }
 	Point operator / (T a) const { return {x / a, y / a}; }
@@ -60,10 +60,9 @@ namespace Linear {
 typedef vector<Point> Polygon;
 namespace Polygonal {
 	using namespace Vectorial;
-
 	Polygon getConvexPolygon(vector<Point>& p) {
 		int n = p.size();
-		if( n <= 1 ) return p;  
+		if( n <= 1 ) return p;
 		sort(p.begin(), p.end());
 		int cnt = 0;
 		Polygon q(n + n);
@@ -81,22 +80,22 @@ namespace Polygonal {
 		assert(n >= 3);
 		int lo = 1, hi = n - 1;
 		if( dcmp(cross( p[lo] - p[0], p[hi] - p[0] )) > 0 ) swap(lo, hi);
-		if( dcmp(cross( p[lo] - p[0], a - p[0] )) > 0 or 
+		if( dcmp(cross( p[lo] - p[0], a - p[0] )) > 0 or
 			dcmp(cross( p[hi] - p[0], a - p[0] )) < 0 ) return false;
 		while( abs(lo - hi) > 1 ) {
 			int mid = (lo + hi) / 2;
 			if( dcmp(cross( p[mid] - p[0], a - p[0] )) >= 0 ) hi = mid;
 			else                                        lo = mid;
-		} 
+		}
 		return dcmp(cross( p[hi] - p[lo], a - p[lo] )) < 0;
 	}
 	double polygonArea(Polygon& p) {
 		int n = p.size();
 		if( n < 3 ) return 0;
 		double area = 0;
-		for(int i = 0; i < n - 1; i++) 
+		for(int i = 0; i < n - 1; i++)
 			area += cross( p[i] - p[0], p[i + 1] - p[0] );
-	    
+
 	    return fabs(area / 2.0);
 	    //return abs(area); // for picks theorem
 	}
@@ -115,7 +114,7 @@ namespace Polygonal {
 		ll s = polygonArea(p); // s = s + s
 		ll b = pointsOnBoundary(p);
 		ll i = s + 2 - b;
-		return i / 2; 
+		return i / 2;
 	}
 	//(nlogn) solution using ternary search
 	double minFarPointFromEdges(Polygon& p) {
@@ -131,14 +130,14 @@ namespace Polygonal {
 				int m1 = (l + d) % n;
 				int m2 = (r - d + n) % n;
 				//use fabs() when the points are double
-				if( dcmp(abs(cross(p[j] - p[i], p[m1] - p[i])) - 
+				if( dcmp(abs(cross(p[j] - p[i], p[m1] - p[i])) -
 					abs(cross(p[j] - p[i], p[m2] - p[i]))) > 0 ) r = m2;
 				else l = m1;
 			}
-			double h = max(abs(cross(p[j] - p[i], p[l] - p[i])), 
+			double h = max(abs(cross(p[j] - p[i], p[l] - p[i])),
 							abs(cross(p[j] - p[i], p[r] - p[i])));
 			if( l != r ) h = max(h, (double)abs(cross(p[j] - p[i], p[(l + 1) % n] - p[i])));
-			ret = min(ret, h / len(p[i] - p[j])); 
+			ret = min(ret, h / len(p[i] - p[j]));
 		}
 		return ret;
 	}
@@ -147,5 +146,5 @@ namespace Polygonal {
 int main() {
 	ios_base :: sync_with_stdio(0);
 	cin.tie(0), cout.tie(0);
-	return 0;
+
 }
