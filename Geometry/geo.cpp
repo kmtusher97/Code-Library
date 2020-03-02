@@ -25,12 +25,12 @@ struct Point {
 	Point operator * (T a) const { return {x * a, y * a}; }
 	Point operator / (T a) const { return {x / a, y / a}; }
 	Point rotateLeft() { return {-y, x}; }
-    Point rotateRight() { return {y, -x}; }
-    Point rotate(Point p, double angle){
-		Point v = Point(x, y) - p;
+	Point rotateRight() { return {y, -x}; }
+	Point rotate(Point p, double angle){
+	Point v = Point(x, y) - p;
 		double c = cos(angle), s = sin(angle);
 		return {p.x + v.x * c - v.y * s, p.y + v.x * s + v.y * c};
-    }
+	}
 };
 
 typedef Point Vector;
