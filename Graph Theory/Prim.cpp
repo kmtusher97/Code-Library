@@ -1,4 +1,4 @@
-typedef ll ll;
+typedef long long ll;
 typedef pair<ll, int> pii;
 
 const int MAX = 1e4 + 5;
